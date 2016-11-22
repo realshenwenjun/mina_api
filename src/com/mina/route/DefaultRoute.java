@@ -7,17 +7,13 @@ import com.mina.core.util.InfUtil;
 import com.mina.route.annotation.Mapping;
 import com.mina.route.exception.InitRouteMappingException;
 import com.mina.route.exception.RouteNotFoundException;
-import com.mina.route.util.ClassFindUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -39,57 +35,31 @@ public class DefaultRoute implements HttpHandler {
         initRoute();
     }
 
-    public static void main(String[] args) {
-        String s = "AsssSS.class";
-        System.out.println(s.substring(s.lastIndexOf(".") + 1));
-    }
     private void initRoute() throws Exception {
-        //扫描包找到@Mapping的类
-        List<String> classNames = new ArrayList<String>();
-        try {
-            classNames = ClassFindUtil.loop(new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()), "");
-        } catch (Exception e) {
-            throw new InitRouteMappingException("init route mapping fail.");
-        }
-        if (classNames.size() != 0) {
-            for (String className : classNames) {
-                try {
-                    //把spring bean 放入缓存
-                    String index0 = className.substring(0,1);
-                    className = className.replace(index0,index0.toLowerCase());
-                    Object o = this.context.getBean(className);
-                    Method[] methods = o.getClass().getDeclaredMethods(); // 获取实体类的所有属性，返回Field数组
-                    for (int j = 0; j < methods.length; j++) { // 遍历所有属性
-                        Mapping m = methods[j].getAnnotation(Mapping.class);
-                        if (m != null) {//手动注入
-                            initService(o);
-                            Invoke invoke = new Invoke();
-                            invoke.setO(o);
-                            invoke.setM(methods[j]);
-                            routes.put(m.value(), invoke);
-                        }
+        Map<String, Object> beans = context.getBeansWithAnnotation(Mapping.class);
+        System.out.println(beans);
+        for (String key : beans.keySet()) {
+            try {
+                Object o = beans.get(key);
+                Method[] methods = o.getClass().getDeclaredMethods(); // 获取实体类的所有属性，返回Field数组
+                for (int j = 0; j < methods.length; j++) { // 遍历所有属性
+                    Mapping m = methods[j].getAnnotation(Mapping.class);
+                    if (m != null) {//手动注入
+                        Invoke invoke = new Invoke();
+                        invoke.setO(o);
+                        invoke.setM(methods[j]);
+                        routes.put(m.value(), invoke);
                     }
-                } catch (Exception e) {
-                    throw new InitRouteMappingException("init "+className+" route mapping fail.");
                 }
-            }
-        }
-    }
-
-    private void initService(Object o) throws IllegalAccessException {
-        Field[] fields = o.getClass().getDeclaredFields(); // 获取实体类的所有属性，返回Field数组
-        for (int j = 0; j < fields.length; j++) { // 遍历所有属性
-            Autowired a = fields[j].getAnnotation(Autowired.class);
-            if (a != null) {//手动注入
-                fields[j].setAccessible(true);
-                fields[j].set(o, this.context.getBean(fields[j].getName()));
+            } catch (Exception e) {
+                throw new InitRouteMappingException("init " + key + " route mapping fail.");
             }
         }
     }
 
     private Invoke getInvoke(String cxt) throws RouteNotFoundException {
         // TODO 分析cxt得到key
-        Invoke invoke = routes.get("/"+cxt);
+        Invoke invoke = routes.get("/" + cxt);
         if (invoke == null) {
             throw new RouteNotFoundException();
         }
