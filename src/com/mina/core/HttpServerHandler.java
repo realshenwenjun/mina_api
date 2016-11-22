@@ -1,8 +1,7 @@
-package com.doloko.api.core;
+package com.mina.core;
 
-import com.alibaba.fastjson.JSONException;
-import com.doloko.api.core.exception.InfException;
-import com.doloko.api.route.exception.RouteNotFoundException;
+import com.mina.core.exception.InfException;
+import com.mina.route.exception.RouteNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -132,8 +131,8 @@ public class HttpServerHandler extends IoHandlerAdapter {
                 response.setResponseCode(HttpResponseMessage.HTTP_STATUS_EXCEPTION);
             else if (e instanceof RouteNotFoundException)
                 response.setResponseCode(HttpResponseMessage.HTTP_STATUS_NOT_FOUND);
-            else if (e instanceof JSONException)
-                response.setResponseCode(HttpResponseMessage.HTTP_STATUS_BAD_REQUEST);
+//            else if (e instanceof JSONException)
+//                response.setResponseCode(HttpResponseMessage.HTTP_STATUS_BAD_REQUEST);
             if (session.isConnected()) {
                 //session.write(response).addListener(IoFutureListener.CLOSE); //socket发送回应 关闭连接
                 session.write(response);

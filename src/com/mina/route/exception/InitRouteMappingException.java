@@ -1,4 +1,4 @@
-package com.doloko.api.route.exception;
+package com.mina.route.exception;
 
 /**
  * Created by Administrator on 2016/11/20.

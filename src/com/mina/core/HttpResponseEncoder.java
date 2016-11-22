@@ -1,4 +1,4 @@
-package com.doloko.api.core;
+package com.mina.core;
 
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;

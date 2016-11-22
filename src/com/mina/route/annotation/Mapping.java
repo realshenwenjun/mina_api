@@ -1,4 +1,4 @@
-package com.doloko.api.route.annotation;
+package com.mina.route.annotation;
 
 import java.lang.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.doloko.api.core.exception;
+package com.mina.core.exception;
 
 /**
  * Created by ASUS on 2016/11/18.

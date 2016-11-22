@@ -1,7 +1,7 @@
-package com.doloko.api.core;
+package com.mina.core;
 
 
-import com.doloko.api.core.util.DateUtil;
+import com.mina.core.util.DateUtil;
 import org.apache.mina.core.buffer.IoBuffer;
 
 import java.io.ByteArrayOutputStream;

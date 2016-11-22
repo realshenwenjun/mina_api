@@ -1,7 +1,7 @@
-package com.doloko.api.core.util;
+package com.mina.core.util;
 
-import com.doloko.api.core.HttpRequestMessage;
-import com.doloko.api.core.exception.InfException;
+import com.mina.core.HttpRequestMessage;
+import com.mina.core.exception.InfException;
 import org.apache.commons.lang.StringUtils;
 
 /**

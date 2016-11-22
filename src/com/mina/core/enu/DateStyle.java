@@ -1,4 +1,4 @@
-package com.doloko.api.core.enu;
+package com.mina.core.enu;
 
 public enum DateStyle {
     YYYY_MM("yyyy-MM", false),

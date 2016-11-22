@@ -1,7 +1,10 @@
 package com.doloko.test;
 
-import com.doloko.api.core.HttpRequestMessage;
-import com.doloko.api.route.annotation.Mapping;
+import com.mina.core.HttpRequestMessage;
+import com.mina.route.annotation.Mapping;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +15,14 @@ import org.springframework.stereotype.Service;
 @Service
 @Mapping
 public class UserController {
+    Logger logger = Logger.getLogger(UserController.class);
+    private static final Log log = LogFactory.getLog(UserController.class.getName());
     @Autowired
     private UserService userService;
     @Mapping("/user/regist")
     public String regist(HttpRequestMessage request){
+        logger.info("logf4j");
+        log.info("common log");
         userService.say();
         return "成功了";
     }

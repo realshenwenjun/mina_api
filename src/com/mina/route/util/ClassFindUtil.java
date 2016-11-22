@@ -1,11 +1,9 @@
-package com.doloko.api.route.util;
+package com.mina.route.util;
 
-import com.doloko.api.route.annotation.Mapping;
+import com.mina.route.annotation.Mapping;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

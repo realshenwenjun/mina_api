@@ -1,4 +1,4 @@
-package com.doloko.api.core.util;
+package com.mina.core.util;
 
 import java.text.FieldPosition;
 import java.text.ParseException;

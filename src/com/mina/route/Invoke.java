@@ -1,6 +1,6 @@
-package com.doloko.api.route;
+package com.mina.route;
 
-import com.doloko.api.core.HttpRequestMessage;
+import com.mina.core.HttpRequestMessage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

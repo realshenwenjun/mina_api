@@ -1,4 +1,4 @@
-package com.doloko.api.core.util;
+package com.mina.core.util;
 
 /*
  * <p>Title: EAP企业应用开发平台</p>
@@ -10,7 +10,7 @@ package com.doloko.api.core.util;
  * <p>Company: www.surekam.com</p>
  */
 
-import com.doloko.api.core.enu.DateStyle;
+import com.mina.core.enu.DateStyle;
 import org.apache.commons.lang.time.DateUtils;
 
 import java.math.BigDecimal;

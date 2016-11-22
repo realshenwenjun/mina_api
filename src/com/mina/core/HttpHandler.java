@@ -1,4 +1,4 @@
-package com.doloko.api.core;
+package com.mina.core;
 
 /**
  * HTTP请求的处理接口

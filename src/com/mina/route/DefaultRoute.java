@@ -1,13 +1,13 @@
-package com.doloko.api.route;
+package com.mina.route;
 
-import com.doloko.api.core.HttpHandler;
-import com.doloko.api.core.HttpRequestMessage;
-import com.doloko.api.core.HttpResponseMessage;
-import com.doloko.api.core.util.InfUtil;
-import com.doloko.api.route.annotation.Mapping;
-import com.doloko.api.route.exception.InitRouteMappingException;
-import com.doloko.api.route.exception.RouteNotFoundException;
-import com.doloko.api.route.util.ClassFindUtil;
+import com.mina.core.HttpHandler;
+import com.mina.core.HttpRequestMessage;
+import com.mina.core.HttpResponseMessage;
+import com.mina.core.util.InfUtil;
+import com.mina.route.annotation.Mapping;
+import com.mina.route.exception.InitRouteMappingException;
+import com.mina.route.exception.RouteNotFoundException;
+import com.mina.route.util.ClassFindUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class DefaultRoute implements HttpHandler {
         //扫描包找到@Mapping的类
         List<String> classNames = new ArrayList<String>();
         try {
-            classNames = ClassFindUtil.loop(new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()),"");
+            classNames = ClassFindUtil.loop(new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()), "");
         } catch (Exception e) {
             throw new InitRouteMappingException("init route mapping fail.");
         }

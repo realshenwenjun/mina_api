@@ -1,9 +1,5 @@
-package com.doloko.api.core;
+package com.mina.core;
 
-import com.alibaba.fastjson.JSON;
-
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -54,17 +50,18 @@ public class HttpRequestMessage {
         String temp = url[0];
         String[] arr = temp.split("[?]");
         context = arr[0];
-        if ("POST".equals(headers.get("Method")[0])) {
-            if (headers.get("Content-Type")[0].contains("text/xml")) {
-                headers.put("context", new String[]{arr[1]});
-            } else if (headers.get("Content-Type")[0].contains("application/json")) {
-                setJsonParameter(headers.get("@body")[0]);
-            } else if (headers.get("Content-Type")[0].contains("application/x-www-form-urlencoded")) {
-                setParameter(headers.get("@body")[0]);
-            } else if ("multipart/form-data".equals(headers.get("Content-Type"))) {
-
-            }
-        } else
+//        if ("POST".equals(headers.get("Method")[0])) {
+//            if (headers.get("Content-Type")[0].contains("text/xml")) {
+//                headers.put("context", new String[]{arr[1]});
+//            } else if (headers.get("Content-Type")[0].contains("application/json")) {
+//                setJsonParameter(headers.get("@body")[0]);
+//            } else if (headers.get("Content-Type")[0].contains("application/x-www-form-urlencoded")) {
+//                setParameter(headers.get("@body")[0]);
+//            } else if ("multipart/form-data".equals(headers.get("Content-Type"))) {
+//
+//            }
+//        } else
+        if (arr.length > 1)
             setParameter(arr[1]);
         return context;
     }
@@ -79,18 +76,18 @@ public class HttpRequestMessage {
             }
         }
     }
-
-    private void setJsonParameter(String jsonString) {
-        Map<String, String> m = JSON.parseObject(jsonString, HashMap.class);
-        if (m != null) {
-            Iterator<Entry<String, String>> entries = m.entrySet().iterator();
-            while (entries.hasNext()) {
-                Map.Entry<String, String> entry = entries.next();
-                headers.put("@" + entry.getKey(), new String[]{String.valueOf(entry.getValue())});
-            }
-        }
-
-    }
+//
+//    private void setJsonParameter(String jsonString) {
+//        Map<String, String> m = JSON.parseObject(jsonString, HashMap.class);
+//        if (m != null) {
+//            Iterator<Entry<String, String>> entries = m.entrySet().iterator();
+//            while (entries.hasNext()) {
+//                Map.Entry<String, String> entry = entries.next();
+//                headers.put("@" + entry.getKey(), new String[]{String.valueOf(entry.getValue())});
+//            }
+//        }
+//
+//    }
 
     public String getTempContext() {
         String[] url = headers.get("Context");

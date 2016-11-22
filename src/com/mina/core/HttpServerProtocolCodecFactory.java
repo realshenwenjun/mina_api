@@ -1,4 +1,4 @@
-package com.doloko.api.core;
+package com.mina.core;
 
 import org.apache.mina.filter.codec.demux.DemuxingProtocolCodecFactory;
 
