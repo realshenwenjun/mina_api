@@ -1,5 +1,6 @@
 package com.doloko.api.core;
 
+import com.alibaba.fastjson.JSONException;
 import com.doloko.api.core.exception.InfException;
 import com.doloko.api.route.exception.RouteNotFoundException;
 import org.apache.commons.logging.Log;
@@ -51,7 +52,7 @@ public class HttpServerHandler extends IoHandlerAdapter {
 	}*/
 
     //old
-	/*
+    /*
 	public void messageReceived(IoSession session, Object message) {
 		// Check that we can service the request context
 	   //在使用nginx情况下 这里获取的是nginx服务器的ip
@@ -123,13 +124,16 @@ public class HttpServerHandler extends IoHandlerAdapter {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             //	e.printStackTrace();
             HttpResponseMessage response = new HttpResponseMessage();
-            response.setContentType("text/plain");
+            response.setContentType("application/json");
             if (e instanceof InfException)
                 response.setResponseCode(HttpResponseMessage.HTTP_STATUS_EXCEPTION);
             else if (e instanceof RouteNotFoundException)
                 response.setResponseCode(HttpResponseMessage.HTTP_STATUS_NOT_FOUND);
+            else if (e instanceof JSONException)
+                response.setResponseCode(HttpResponseMessage.HTTP_STATUS_BAD_REQUEST);
             if (session.isConnected()) {
                 //session.write(response).addListener(IoFutureListener.CLOSE); //socket发送回应 关闭连接
                 session.write(response);

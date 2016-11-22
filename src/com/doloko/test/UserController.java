@@ -23,7 +23,7 @@ public class UserController {
     @Mapping("/user/login")
     public String login(HttpRequestMessage request){
         userService.say();
-        String q = request.getParameter("q");
+        String q = request.getParameter("e");
         return "{\"id\":"+q+"}";
     }
 }

@@ -102,7 +102,7 @@ public class DefaultRoute implements HttpHandler {
         Invoke invoke = getInvoke(context);
         invoke.setR(request);
         HttpResponseMessage response = new HttpResponseMessage();
-        response.setContentType("text/plain");
+        response.setContentType("application/json");
         response.setResponseCode(HttpResponseMessage.HTTP_STATUS_SUCCESS);
         response.appendBody(invoke.invoke());
         return response;
