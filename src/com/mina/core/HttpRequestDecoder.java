@@ -50,6 +50,7 @@ public class HttpRequestDecoder extends MessageDecoderAdapter {
 
     //mina调用判断是否能收完整
     public MessageDecoderResult decodable(IoSession session, IoBuffer in) {
+        System.out.println("*******************************判断接受完没有");
         try {
             //System.out.println("can decodable?");
             if(messageComplete(in)){
@@ -74,6 +75,7 @@ public class HttpRequestDecoder extends MessageDecoderAdapter {
     //mina接收到完整数据，进入decode
     public MessageDecoderResult decode(IoSession session, IoBuffer in,
                                        ProtocolDecoderOutput out) throws Exception {
+        System.out.println("**************************如果接收完了回调");
         HttpRequestMessage m = decodeBody(in);
         // Return NEED_DATA if the body is not fully read.
 		/*

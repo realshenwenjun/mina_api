@@ -83,8 +83,10 @@ public class HttpServer {
 
 
             HttpServerHandler handler = new HttpServerHandler();
+            FileReceiveHandler fileReceiveHandler = new FileReceiveHandler();
             handler.setHandler(httpHandler);
-            acceptor.setHandler(handler);
+//            acceptor.setHandler(handler);
+            acceptor.setHandler(fileReceiveHandler);
 
 
             acceptor.bind(new InetSocketAddress(port));
